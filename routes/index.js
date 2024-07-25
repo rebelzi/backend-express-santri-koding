@@ -4,29 +4,35 @@ const express = require('express')
 //init express router
 const router = express.Router();
 
-// import verifyToken
-const verifyToken = require('../middlewares/auth')
+//import verifyToken
+const verifyToken = require('../middlewares/auth');
 
 //import register controller
-const registerController = require('../controllers/registerController');
+const registerController = require('../controllers/RegisterController');
 
-// import login controller 
+//import login controller
 const loginController = require('../controllers/loginController');
 
-// import users conroller 
-const usersController = require('../controllers/userController');
+//import user controller
+const userController = require('../controllers/userController');
 
 //import validate register and login
 const { validateRegister, validateLogin } = require('../utils/validators/auth');
 
-//define route for register 
+//import validate user
+const { validateUser } = require('../utils/validators/user');
+
+//define route for register
 router.post('/register', validateRegister, registerController.register);
 
-// define route for login 
+//define route for login
 router.post('/login', validateLogin, loginController.login);
 
-// define route for users 
-router.get('/admin/users', verifyToken, usersController.findUsers);
+//define route for user
+router.get('/admin/users', verifyToken, userController.findUsers);
+
+//define route for user create
+router.post('/admin/users', verifyToken, validateUser, userController.createUser);
 
 //export router
 module.exports = router
