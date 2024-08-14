@@ -50,10 +50,10 @@ router.put('/admin/users/:id', verifyToken, validateUser, userController.updateU
 router.delete('/admin/users/:id', verifyToken, userController.deleteUser);
 
 //define route for create member
-router.post('admin/members', verifyToken, validateMember, memberController.createMember);
+router.post('/admin/members', verifyToken, validateMember, memberController.createMember);
 
 //define route for get member
-router.get('admin/members', verifyToken, memberController.getMember);
+router.get('/admin/members', verifyToken, memberController.getMember);
 
 //export router
 module.exports = router
