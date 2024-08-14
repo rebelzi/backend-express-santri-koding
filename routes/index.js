@@ -16,11 +16,17 @@ const loginController = require('../controllers/loginController');
 //import user controller
 const userController = require('../controllers/userController');
 
+//import member controller
+const memberController = require('../controllers/memberController');
+
 //import validate register and login
 const { validateRegister, validateLogin } = require('../utils/validators/auth');
 
 //import validate user
 const { validateUser } = require('../utils/validators/user');
+
+//import validate member
+const { validateMember } = require('../utils/validators/member');
 
 //define route for register
 router.post('/register', validateRegister, registerController.register);
@@ -42,6 +48,10 @@ router.put('/admin/users/:id', verifyToken, validateUser, userController.updateU
 
 //define delete user
 router.delete('/admin/users/:id', verifyToken, userController.deleteUser);
+
+
+//define route for get member
+router.get('admin/members', verifyToken, memberController.getMember);
 
 //export router
 module.exports = router
