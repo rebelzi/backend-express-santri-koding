@@ -14,8 +14,8 @@ const validateMember = [
             if (!value) {
                 throw new Error('Alamat Email Salah');
             }
-            const user = await prisma.user.findUnique({ where: {email: value} });
-            if (user && user.id !== Number(req.params.id)) {
+            const member = await prisma.member.findUnique({ where: {email: value} });
+            if (member && member.id !== Number(req.params.id)) {
                 throw new Error('Email Sudah digunakan');
             }
             return true;
