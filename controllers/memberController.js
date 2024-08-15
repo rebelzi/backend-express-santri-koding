@@ -7,11 +7,8 @@ const prisma = require("../prisma/client");
 //import validationResult from express-validator
 const { validationResult } = require("express-validator");
 
-//imort bcrypt
-const bcrypt = require("bcryptjs");
-
 //function createMember
-const createMember = async (req, res) => {
+const createMembers = async (req, res) => {
 
     //periksa hasil validasi
     const errors = validationResult(req);
@@ -28,7 +25,7 @@ const createMember = async (req, res) => {
         try {
 
             //insert data
-            const member = await prisma.member.create({
+            const members = await prisma.member.create({
                 data: {
                     name: req.body.name,
                     email: req.body.email,
@@ -38,7 +35,7 @@ const createMember = async (req, res) => {
             res.status(201).send({
                 success: true,
                 message: "Nama member berhasil di Input",
-                data: member,
+                data: members,
             });
         } catch (error) {
             res.status(500).send({
@@ -48,18 +45,18 @@ const createMember = async (req, res) => {
         }
 };
 //function getMember
-const getMember = async (req, res) => {
+const getMembers = async (req, res) => {
     try {
 
         //get all members from database
-        const members = await prisma.user.findMany({
+        const members = await prisma.member.findMany({
             select: {
                 id: true,
                 name: true,
                 email: true,
             },
             orderBy: {
-                name: "desc",
+                id: "desc",
             },
         });
 
@@ -77,4 +74,4 @@ const getMember = async (req, res) => {
     }
 };
 
-module.exports = { createMember, getMember }
+module.exports = { createMembers, getMembers }
