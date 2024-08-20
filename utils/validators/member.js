@@ -20,6 +20,7 @@ const validateMember = [
             }
             return true;
         }),
+    body('jiko').notEmpty().withMessage('Jiko Wajib diisi')
 ];
 
 module.exports = { validateMember }

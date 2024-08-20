@@ -29,12 +29,13 @@ const createMembers = async (req, res) => {
                 data: {
                     name: req.body.name,
                     email: req.body.email,
+                    jiko: req.body.jiko,
                 },
             });
 
             res.status(201).send({
                 success: true,
-                message: "Nama member berhasil di Input",
+                message: "Data member berhasil di Input",
                 data: members,
             });
         } catch (error) {
