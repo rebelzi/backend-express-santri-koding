@@ -45,7 +45,7 @@ const createMembers = async (req, res) => {
             });
         }
 };
-//function getMember
+//function getMembers
 const getMembers = async (req, res) => {
     try {
 
