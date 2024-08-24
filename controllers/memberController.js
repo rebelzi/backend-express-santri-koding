@@ -74,5 +74,39 @@ const getMembers = async (req, res) => {
         });
     }
 };
+//function findMembersByName
+const findMembersByName = async (req, res) => {
 
-module.exports = { createMembers, getMembers }
+    //get name from params
+    const { name } = req.params;
+
+    try {
+
+        //get user by name
+        const members = await prisma.member.findUnique({
+            where: {
+                name: name,
+            },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                jiko: true,
+            },
+        });
+
+        //send response
+        res.status(200).send({
+            success: true,
+            message: `Berhasil mengambil user dengan nama ${name}`
+        })
+    } 
+    catch (error) {
+        res.status(500).send({
+            success: false,
+            message: "Internal Server Error",
+        })
+    };
+}
+
+module.exports = { createMembers, getMembers, findMembersByName }
