@@ -56,7 +56,7 @@ router.post('/admin/members', verifyToken, validateMember, memberController.crea
 router.get('/admin/members', verifyToken, memberController.getMembers);
 
 //define router for user by name
-router.get('/admin/members/:name', verifyToken, validateMember, memberController.findMembersByName);
+router.get('/admin/members/:name', verifyToken, memberController.findMembersByName);
 
 //export router
 module.exports = router

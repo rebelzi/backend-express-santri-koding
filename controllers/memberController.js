@@ -74,16 +74,16 @@ const getMembers = async (req, res) => {
         });
     }
 };
-//function findMembersByName
+// Function findMembersByName
 const findMembersByName = async (req, res) => {
 
-    //get name from params
+    // Get name from params
     const { name } = req.params;
 
     try {
 
-        //get user by name
-        const members = await prisma.member.findUnique({
+        // Get members by name
+        const members = await prisma.member.findMany({
             where: {
                 name: name,
             },
@@ -91,22 +91,22 @@ const findMembersByName = async (req, res) => {
                 id: true,
                 name: true,
                 email: true,
-                jiko: true,
             },
         });
 
-        //send response
+        // Send response
         res.status(200).send({
             success: true,
-            message: `Berhasil mengambil user dengan nama ${name}`
-        })
-    } 
-    catch (error) {
+            message: `Berhasil mengabil anggota dengan nama: ${name}`,
+            data: members,
+        });
+    } catch (error) {
         res.status(500).send({
             success: false,
             message: "Internal Server Error",
-        })
-    };
-}
+        });
+    }
+};
+
 
 module.exports = { createMembers, getMembers, findMembersByName }
