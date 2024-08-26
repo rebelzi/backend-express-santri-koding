@@ -27,6 +27,7 @@ const { validateUser } = require('../utils/validators/user');
 
 //import validate member
 const { validateMember } = require('../utils/validators/member');
+const { verify } = require('jsonwebtoken');
 
 //define route for register
 router.post('/register', validateRegister, registerController.register);
@@ -55,10 +56,11 @@ router.post('/admin/members', verifyToken, validateMember, memberController.crea
 //define route for get member
 router.get('/admin/members', verifyToken, memberController.getMembers);
 
-//define router for member by name
+//define route for member by name
 router.get('/admin/members/:name', verifyToken, memberController.findMembersByName);
 
-
+//define route for member details
+router.get('/admin/members/:name', verifyToken, memberController.detailMembers);
 
 //export router
 module.exports = router

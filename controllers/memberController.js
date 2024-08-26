@@ -91,13 +91,14 @@ const findMembersByName = async (req, res) => {
                 id: true,
                 name: true,
                 email: true,
+                jiko: true,
             },
         });
 
         // Send response
         res.status(200).send({
             success: true,
-            message: `Berhasil mengabil anggota dengan nama: ${name}`,
+            message: `Berhasil mengabil member dengan nama: ${name}`,
             data: members,
         });
     } catch (error) {
@@ -109,20 +110,17 @@ const findMembersByName = async (req, res) => {
 };
 
 //function detail member
-const detailMember = async (req, res) => {
+const detailMembers = async (req, res) => {
     
-    //get id from params
-    const { id } = req.params;
-
     //get name from params
     const { name } = req.params;
 
     try {
 
         //get member by name
-        const members = await prisma.member.findUnique({
+        const members = await prisma.member.findMany({
             where: {
-                id: Number(id),
+                name: name,
             },
             select: {
                 id: true,
@@ -135,7 +133,8 @@ const detailMember = async (req, res) => {
         //send response
         res.status(200).send({
             success: true,
-            message: `Berhasil melihar detail member ${name}`
+            message: `Berhasil melihat detail member ${name}`,
+            data: members,
         })
     } catch (error) {
         res.status(500).send({
@@ -145,4 +144,4 @@ const detailMember = async (req, res) => {
     }
 };
 
-module.exports = { createMembers, getMembers, findMembersByName, detailMember }
+module.exports = { createMembers, getMembers, findMembersByName, detailMembers }
