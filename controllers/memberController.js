@@ -111,14 +111,38 @@ const findMembersByName = async (req, res) => {
 //function detail member
 const detailMember = async (req, res) => {
     
+    //get id from params
+    const { id } = req.params;
+
     //get name from params
     const { name } = req.params;
 
     try {
 
         //get member by name
-        const members = await prisma.member.find
+        const members = await prisma.member.findUnique({
+            where: {
+                id: Number(id),
+            },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                jiko: true,
+            },
+        });
+
+        //send response
+        res.status(200).send({
+            success: true,
+            message: `Berhasil melihar detail member ${name}`
+        })
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            message: "Internal Server Error",
+        });
     }
-}
+};
 
 module.exports = { createMembers, getMembers, findMembersByName }
