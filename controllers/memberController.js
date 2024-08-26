@@ -145,4 +145,4 @@ const detailMember = async (req, res) => {
     }
 };
 
-module.exports = { createMembers, getMembers, findMembersByName }
+module.exports = { createMembers, getMembers, findMembersByName, detailMember }
