@@ -108,5 +108,17 @@ const findMembersByName = async (req, res) => {
     }
 };
 
+//function detail member
+const detailMember = async (req, res) => {
+    
+    //get name from params
+    const { name } = req.params;
+
+    try {
+
+        //get member by name
+        const members = await prisma.member.find
+    }
+}
 
 module.exports = { createMembers, getMembers, findMembersByName }
